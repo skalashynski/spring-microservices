@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CatalogItem {
+public class Movie {
+  private String movieId;
   private String name;
-  private String desc;
-  private int rating;
+  private String description;
 }
