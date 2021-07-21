@@ -2,12 +2,14 @@ package com.skalashynski.spring.microservices.discoverserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
-public class Application {
+@EnableEurekaServer
+public class DiscoveryServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(DiscoveryServerApplication.class, args);
 	}
 
 }
