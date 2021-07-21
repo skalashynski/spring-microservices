@@ -1,6 +1,6 @@
 package com.skalashynski.spring.microservices.movieinfoservice.web;
 
-import com.skalashynski.spring.microservices.movieinfoservice.MovieInfo;
+import com.skalashynski.spring.microservices.movieinfoservice.model.MovieInfo;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

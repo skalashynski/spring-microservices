@@ -1,5 +1,6 @@
-package com.skalashynski.spring.microservices.moviecatalogservice.resources;
+package com.skalashynski.spring.microservices.moviecatalogservice.web;
 
+import com.skalashynski.spring.microservices.moviecatalogservice.model.CatalogItem;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/catalog")
-public class MovieCatalogResource {
+public class MovieCatalogController {
 
   @GetMapping("/{userId}")
   public List<CatalogItem> getCatalog(@PathVariable String userId) {

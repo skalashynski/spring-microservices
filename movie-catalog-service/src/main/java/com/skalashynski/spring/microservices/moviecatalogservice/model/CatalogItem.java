@@ -1,4 +1,4 @@
-package com.skalashynski.spring.microservices.moviecatalogservice.resources;
+package com.skalashynski.spring.microservices.moviecatalogservice.model;
 
 public class CatalogItem {
   private String name;
