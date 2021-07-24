@@ -3,6 +3,7 @@ package com.skalashynski.spring.microservices.moviecatalogservice.web;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.skalashynski.spring.microservices.moviecatalogservice.model.CatalogItem;
 import com.skalashynski.spring.microservices.moviecatalogservice.model.Movie;
+import com.skalashynski.spring.microservices.moviecatalogservice.model.Rating;
 import com.skalashynski.spring.microservices.moviecatalogservice.model.UserRating;
 import java.util.Arrays;
 import java.util.List;
@@ -25,18 +26,33 @@ public class MovieCatalogController {
   private WebClient.Builder webClientBuilder;
 
   @RequestMapping("/{userId}")
-  @HystrixCommand(fallbackMethod = "getFallbackCatalog")
   public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
-    UserRating userRating = restTemplate
-        .getForObject("http://ratings-data-service/ratingsdata/user/" + userId, UserRating.class);
+    UserRating userRating = getUserRating(userId);
 
     return userRating.getRatings().stream()
-        .map(rating -> {
-          Movie movie = restTemplate
-              .getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
-          return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
-        })
+        .map(this::getCatalogItem)
         .collect(Collectors.toList());
+  }
+
+  @HystrixCommand(fallbackMethod = "getFallbackUserRating")
+  private UserRating getUserRating(@PathVariable("userId") String userId) {
+    return restTemplate
+        .getForObject("http://ratings-data-service/ratingsdata/user/" + userId, UserRating.class);
+  }
+
+  @HystrixCommand(fallbackMethod = "getFallbackCatalogItem")
+  private CatalogItem getCatalogItem(Rating rating) {
+    Movie movie = restTemplate
+        .getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
+    return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
+  }
+
+  private UserRating getFallbackUserRating(@PathVariable("userId") String userId) {
+    return new UserRating(userId, Arrays.asList(new Rating("0", 0)));
+  }
+
+  private CatalogItem getFallbackCatalogItem(Rating rating) {
+    return new CatalogItem("Movie is not found", "", rating.getRating());
   }
 
 
