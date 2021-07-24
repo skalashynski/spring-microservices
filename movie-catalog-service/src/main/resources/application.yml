@@ -3,3 +3,8 @@ spring:
     name: movie-catalog-service
 server:
   port: 8081
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
