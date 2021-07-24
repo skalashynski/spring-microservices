@@ -12,35 +12,15 @@
 	<artifactId>discover-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Discover server.</name>
-	<description>Education project for MIcroservices. Discover server.</description>
+	<description>Education project for Microservices. Discovery server.</description>
 	<properties>
-		<java.version>11</java.version>
-		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+		<java.version>16</java.version>
+		<spring-cloud.version>2020.0.3</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-			<version>1.1.1</version>
 		</dependency>
 
 		<dependency>
